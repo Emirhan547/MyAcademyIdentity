@@ -8,8 +8,8 @@ namespace EmailApp.Validations
         {
             return new IdentityError
             {
-                Code = nameof(PasswordRequiresDigit),
-                Description = "Parola en az bir rakam içermelidir."
+                Code = "PasswordRequiresDigit",
+                Description = "Parola en az bir rakam(0-9) içermelidir."
             };
         }
 
@@ -17,8 +17,8 @@ namespace EmailApp.Validations
         {
             return new IdentityError
             {
-                Code = nameof(PasswordRequiresLower),
-                Description = "Parola en az bir küçük harf içermelidir."
+                Code = "PasswordRequiresLower",
+                Description = "Parola en az bir küçük harf(a-z) içermelidir."
             };
         }
 
@@ -26,8 +26,16 @@ namespace EmailApp.Validations
         {
             return new IdentityError
             {
-                Code = nameof(PasswordRequiresUpper),
-                Description = "Parola en az bir büyük harf içermelidir."
+                Code = "PasswordRequiresUpper",
+                Description = "Parola en az bir büyük harf(A-Z) içermelidir."
+            };
+        }
+        public override IdentityError PasswordTooShort(int lenght)
+        {
+            return new IdentityError
+            {
+                Code = "PasswordTooShort",
+                Description = $"Şifre en az{lenght} karakterden oluşmalıdır."
             };
         }
 
@@ -35,8 +43,8 @@ namespace EmailApp.Validations
         {
             return new IdentityError
             {
-                Code = nameof(PasswordRequiresNonAlphanumeric),
-                Description = "Parola en az bir özel karakter içermelidir."
+                Code ="PasswordRequiresNonAlphanumeric",
+                Description = "Parola en az bir özel karakter(*,!,.) içermelidir."
             };
         }
 
@@ -44,8 +52,8 @@ namespace EmailApp.Validations
         {
             return new IdentityError
             {
-                Code = nameof(DuplicateUserName),
-                Description = $"'{userName}' kullanıcı adı zaten alınmış."
+                Code = "DuplicateUserName",
+                Description = $"{userName} kullanıcı adı zaten alınmış."
             };
         }
 
@@ -53,8 +61,8 @@ namespace EmailApp.Validations
         {
             return new IdentityError
             {
-                Code = nameof(DuplicateEmail),
-                Description = $"'{email}' e-posta adresi zaten kullanılmaktadır."
+                Code = "DuplicateEmail",
+                Description = $"{email} e-posta adresi zaten kullanılmaktadır."
             };
         }
     }

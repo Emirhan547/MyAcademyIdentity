@@ -6,20 +6,33 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     var connectionString = builder.Configuration.GetConnectionString("SqlConnection");
-    options.UseSqlServer(connectionString); 
-    });
-builder.Services.AddIdentity<AppUser, AppRole>(config => { config.User.RequireUniqueEmail = true; })
-    .AddEntityFrameworkStores<AppDbContext>()
-.AddErrorDescriber<CustomErrorDescriber>();
+
+
+    options.UseSqlServer(connectionString);
+});
+
+builder.Services.AddIdentity<AppUser, AppRole>(config =>
+{
+    config.User.RequireUniqueEmail = true;
+
+}).AddEntityFrameworkStores<AppDbContext>()
+  .AddErrorDescriber<CustomErrorDescriber>();
+
+
 
 builder.Services.AddControllersWithViews();
+
+
 builder.Services.ConfigureApplicationCookie(opt =>
 {
-    opt.LoginPath = "/Login/Index"; 
+    opt.Cookie.Name = "IdentityCookie";
+    opt.LoginPath = "/Login/Index";
 });
+
 
 var app = builder.Build();
 

@@ -18,8 +18,8 @@ namespace EmailApp.Controllers
             {
                 FirstName = model.FirstName,
                 LastName = model.LastName,
-                UserName = model.UserName,
-                Email = model.Email
+                Email = model.Email,
+                UserName = model.UserName      
             };
             var result = await _userManager.CreateAsync(user, model.Password);
             if (!result.Succeeded)

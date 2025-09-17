@@ -16,7 +16,7 @@ namespace EmailApp.Controllers
             _signInManager = signInManager;
         }
 
-        [HttpGet]
+        
         public IActionResult Index()
         {
             return View();
@@ -34,11 +34,15 @@ namespace EmailApp.Controllers
             var result = await _signInManager.PasswordSignInAsync(user, model.Password, false, false);
             if (!result.Succeeded)
             {
-                ModelState.AddModelError("", " email veya şifre hatalı");
+                ModelState.AddModelError("", " Email veya şifre hatalı");
                 return View(model);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Message");
+        }
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Login");
         }
     }
-}
-       
+}     
