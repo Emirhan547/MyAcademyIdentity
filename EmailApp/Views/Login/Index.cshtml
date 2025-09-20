@@ -1,19 +1,37 @@
 ﻿@model LoginViewModel
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Giriş Yap";
 }
 
-<h1>Giriş Yapma Sayfası</h1>
-<form method="post">
-    <div class="form-group">
-        <label>Email</label>
-        <input type="email"asp-for="Email" class="form-control"required/>
-    </div>
-    <div class="form-group">
-        <label>Şifre</label>
-        <input type="password" asp-for="Password" class="form-control" required />
-    </div>
-    <span class="text-danger">@Html.ValidationSummary()</span>
-    <button class="btn btn-primary">Giriş Yap</button>
+<div class="container mt-5" style="max-width: 400px;">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h3 class="card-title text-center mb-4">Giriş Yap</h3>
 
-</form>
+            <form method="post">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" asp-for="Email" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label>Şifre</label>
+                    <input type="password" asp-for="Password" class="form-control" required />
+                </div>
+
+                <span class="text-danger">@Html.ValidationSummary()</span>
+
+                <!-- Butonu ortalamak için d-flex ve justify-content-center ekledik -->
+                <div class="d-flex justify-content-center mt-3">
+                    <button class="btn btn-primary">Giriş Yap</button>
+                </div>
+            </form>
+
+
+            <hr />
+            <p class="text-center">
+                Hesabınız yok mu?
+                <a asp-controller="Register" asp-action="SignUp">Kayıt Ol</a>
+            </p>
+        </div>
+    </div>
+</div>

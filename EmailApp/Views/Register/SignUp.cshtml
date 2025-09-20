@@ -1,34 +1,45 @@
 ﻿@model RegisterViewModel
 @{
-    ViewData["Title"] = "Signup";
+    ViewData["Title"] = "Kayıt Ol";
 }
 
-<h3>Yeni Kullanıcı Kaydı</h3>
+<div class="container mt-5" style="max-width: 500px;">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h3 class="card-title text-center mb-4">Yeni Kullanıcı Kaydı</h3>
 
-<form method="post">
+            <form method="post">
+                <div class="form-group">
+                    <label>Ad</label>
+                    <input type="text" class="form-control" asp-for="FirstName" required />
+                </div>
+                <div class="form-group">
+                    <label>Soyad</label>
+                    <input type="text" class="form-control" asp-for="LastName" required />
+                </div>
+                <div class="form-group">
+                    <label>Kullanıcı Adı</label>
+                    <input type="text" class="form-control" asp-for="UserName" required />
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" class="form-control" asp-for="Email" required />
+                </div>   
+                <div class="form-group">
+                    <label>Şifre</label>
+                    <input type="password" class="form-control" asp-for="Password" required />
+                </div>
 
-    <div class="form-group">
-        <label>Ad</label>
-        <input type="text" class="form-control" asp-for="FirstName" required />
-    </div>
-    <div class="form-group">
-        <label>Soyad</label>
-        <input type="text" class="form-control" asp-for="LastName" required />
-    </div>
-    <div class="form-group">
-        <label>Kullanıcı Adı</label>
-        <input type="text" class="form-control" asp-for="UserName" required />
-    </div>
-    <div class="form-group">
-        <label>Email</label>
-        <input type="email" class="form-control" asp-for="Email" required />
-    </div>
-    <div class="form-group">
-        <label>Şifre</label>
-        <input type="password" class="form-control" asp-for="Password" required />
-    </div>
+                <span class="text-danger">@Html.ValidationSummary()</span>
 
-    <span class="text-danger">@Html.ValidationSummary()</span>
+                <button class="btn btn-primary mt-3 d-block mx-auto">Kayıt Ol</button>
+            </form>
 
-    <button class="btn btn-primary">Kayıt Ol</button>
-</form>
+            <hr />
+            <p class="text-center">
+                Zaten hesabınız var mı?
+                <a asp-controller="Login" asp-action="Index">Giriş Yap</a>
+            </p>
+        </div>
+    </div>
+</div>

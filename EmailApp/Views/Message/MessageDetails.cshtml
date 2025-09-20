@@ -1,73 +1,42 @@
 ﻿@model Message
 @{
-    ViewData["Title"] = "MessageDetail";
+    ViewData["Title"] = "Mesaj Detayı";
     Layout = "~/Views/MainLayout/Index.cshtml";
 }
 
 <div class="col-md-9">
     <div class="card card-primary card-outline">
         <div class="card-header">
-            <h3 class="card-title">Mail İçeriği</h3>
-
-            <div class="card-tools">
-                <a href="#" class="btn btn-tool" data-toggle="tooltip" title="Previous"><i class="fas fa-chevron-left"></i></a>
-                <a href="#" class="btn btn-tool" data-toggle="tooltip" title="Next"><i class="fas fa-chevron-right"></i></a>
-            </div>
+            <h3 class="card-title">📨 Mail İçeriği</h3>
         </div>
-        <!-- /.card-header -->
-        <div class="card-body p-0">
-            <div class="mailbox-read-info">
+        <div class="card-body p-3">
+            <div class="mailbox-read-info mb-3">
                 <h5>@Model.Subject</h5>
                 <h6>
-                    Kimden: @Model.Sender.Email
-                    <span class="mailbox-read-time float-right">@Model.SentDate</span>
+                    <i class="fas fa-user mr-1 text-primary"></i> @Model.Sender.Email
+                    <span class="mailbox-read-time float-right">@Model.SentDate.ToString("dd.MM.yyyy HH:mm")</span>
                 </h6>
+                @if (!string.IsNullOrEmpty(Model.Category))
+                {
+                    <span class="badge badge-info">@Model.Category</span>
+                }
             </div>
-            <!-- /.mailbox-read-info -->
-            <div class="mailbox-controls with-border text-center">
-                <div class="btn-group">
-                    <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title="Delete">
-                        <i class="far fa-trash-alt"></i>
-                    </button>
-                    <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title="Reply">
-                        <i class="fas fa-reply"></i>
-                    </button>
-                    <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title="Forward">
-                        <i class="fas fa-share"></i>
-                    </button>
-                </div>
-                <!-- /.btn-group -->
-                <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print">
-                    <i class="fas fa-print"></i>
-                </button>
-            </div>
-            <!-- /.mailbox-controls -->
             <div class="mailbox-read-message">
-
-
-                <p>
-                    @Model.Body
-                </p>
-
-
+                <p>@Model.Body</p>
             </div>
-            <!-- /.mailbox-read-message -->
         </div>
-        <!-- /.card-body -->
-        <div class="card-footer bg-white">
-            <ul class="mailbox-attachments d-flex align-items-stretch clearfix">
-            </ul>
-        </div>
-        <!-- /.card-footer -->
         <div class="card-footer">
             <div class="float-right">
-                <button type="button" class="btn btn-default"><i class="fas fa-reply"></i> Reply</button>
-                <button type="button" class="btn btn-default"><i class="fas fa-share"></i> Forward</button>
+                <a href="/Message/SendMessage?replyTo=@Model.MessageId" class="btn btn-sm btn-primary">
+                    <i class="fas fa-reply"></i> Yanıtla
+                </a>
             </div>
-            <button type="button" class="btn btn-default"><i class="far fa-trash-alt"></i> Delete</button>
-            <button type="button" class="btn btn-default"><i class="fas fa-print"></i> Print</button>
+            <form asp-action="DeleteMessage" method="post" class="d-inline">
+                <input type="hidden" name="id" value="@Model.MessageId" />
+                <button type="submit" class="btn btn-sm btn-outline-danger">
+                    <i class="far fa-trash-alt"></i> Sil
+                </button>
+            </form>
         </div>
-        <!-- /.card-footer -->
     </div>
-    <!-- /.card -->
 </div>

@@ -1,0 +1,90 @@
+﻿@model List<Message>
+@{
+    ViewData["Title"] = "Çöp Kutusu";
+    Layout = "~/Views/MainLayout/Index.cshtml";
+}
+
+<div class="col-md-9">
+    <div class="card card-danger card-outline">
+        <div class="card-header">
+            <h3 class="card-title"><i class="fas fa-trash-alt mr-1"></i> Çöp Kutusu</h3>
+            <div class="card-tools">
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control" placeholder="Mail Ara">
+                    <div class="input-group-append">
+                        <div class="btn btn-danger">
+                            <i class="fas fa-search"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body p-0">
+            <div class="mailbox-controls mb-2">
+                <!-- Kontroller aynen korunuyor -->
+            </div>
+
+            <div class="table-responsive mailbox-messages">
+                <table class="table table-hover table-striped">
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            var badgeClass = item.Category switch
+                            {
+                                "Önemli" => "badge-danger",
+                                "İş" => "badge-info",
+                                "Aile" => "badge-success",
+                                "Kişisel" => "badge-warning",
+                                "Diğer" => "badge-secondary",
+                                _ => "badge-primary"
+                            };
+                            <tr>
+                                <td>
+                                    <div class="icheck-primary">
+                                        <input type="checkbox" id="check@(item.MessageId)" value="@item.MessageId" class="message-checkbox">
+                                        <label for="check@(item.MessageId)"></label>
+                                    </div>
+                                </td>
+                                <td class="mailbox-name">
+                                    <i class="fas fa-user-slash text-danger mr-1"></i>
+                                    @item.Sender.FirstName @item.Sender.LastName
+                                </td>
+                                <td class="mailbox-subject text-truncate" style="max-width:300px;">
+                                    <b>@item.Subject</b> - @item.Body.Substring(0, Math.Min(item.Body.Length, 50))...
+                                </td>
+                                <td class="mailbox-attachment">
+                                    @if (!string.IsNullOrEmpty(item.Category))
+                                    {
+                                        <span class="badge @badgeClass">@item.Category</span>
+                                    }
+                                </td>
+                                <td class="mailbox-date">@item.SentDate.ToString("dd.MM.yyyy HH:mm")</td>
+                                <td class="text-right">
+                                    <form asp-action="RestoreMessage" method="post" class="d-inline">
+                                        <input type="hidden" name="id" value="@item.MessageId" />
+                                        <button type="submit" class="btn btn-sm btn-outline-success" title="Geri Yükle">
+                                            <i class="fas fa-undo"></i>
+                                        </button>
+                                    </form>
+                                    <form asp-action="PermanentDelete" method="post" class="d-inline">
+                                        <input type="hidden" name="id" value="@item.MessageId" />
+                                        <button type="submit" class="btn btn-sm btn-outline-danger" title="Kalıcı Sil">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card-footer p-0">
+            <div class="mailbox-controls">
+                <!-- Footer kontrolleri aynen korunuyor -->
+            </div>
+        </div>
+    </div>
+</div>

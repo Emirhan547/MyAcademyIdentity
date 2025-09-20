@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace EmailApp.Migrations
 {
     /// <inheritdoc />
-    public partial class mig_initial : Migration
+    public partial class mig_first : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

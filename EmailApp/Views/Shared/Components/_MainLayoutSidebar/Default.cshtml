@@ -1,0 +1,58 @@
+﻿@model SidebarViewModel
+
+<div class="col-md-3">
+    <a href="/Message/SendMessage" class="btn btn-primary btn-block mb-3">Yeni Mesaj</a>
+
+    <div class="card">
+        <div class="card-body p-0">
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item @(ViewContext.RouteData.Values["action"]?.ToString() == "Index" ? "active" : "")">
+                    <a href="/Message/Index" class="nav-link">
+                        <i class="fas fa-inbox"></i> Gelen Kutusu
+                        <span class="badge bg-primary float-right">@Model.InboxCount</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/Message/SentMessages" class="nav-link">
+                        <i class="far fa-envelope"></i> Gönderilenler
+                        <span class="badge bg-success float-right">@Model.SentCount</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/Message/Drafts" class="nav-link">
+                        <i class="far fa-file-alt"></i> Taslaklar
+                        <span class="badge bg-warning float-right">@Model.DraftCount</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/Message/Trash" class="nav-link">
+                        <i class="fas fa-filter"></i> Çöp Kutusu
+                        <span class="badge bg-danger float-right">@Model.TrashCount</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card mt-2">
+        <div class="card-header">
+            <h3 class="card-title">Kategoriler</h3>
+        </div>
+        <div class="card-body p-0">
+            <ul class="nav nav-pills flex-column">
+                @foreach (var item in Model.CategoryCounts)
+                {
+                    var badgeColor = Model.CategoryColors.ContainsKey(item.Key) ? Model.CategoryColors[item.Key] : "bg-primary";
+                    var textColor = Model.CategoryTextColors.ContainsKey(item.Key) ? Model.CategoryTextColors[item.Key] : "text-primary";
+                    <li class="nav-item">
+                        <a href="/Message/Category?name=@Uri.EscapeDataString(item.Key)" class="nav-link">
+                            <i class="fas fa-circle @textColor"></i> @item.Key
+                            <span class="badge @badgeColor float-right">@item.Value</span>
+                        </a>
+                    </li>
+                }
+            </ul>
+
+        </div>
+    </div>
+</div>

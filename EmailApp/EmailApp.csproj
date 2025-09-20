@@ -7,12 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\AdminLTE-3.0.4\AdminLTE-3.0.4\**" />
+    <Content Remove="wwwroot\AdminLTE-3.0.4\AdminLTE-3.0.4\**" />
+    <EmbeddedResource Remove="wwwroot\AdminLTE-3.0.4\AdminLTE-3.0.4\**" />
+    <None Remove="wwwroot\AdminLTE-3.0.4\AdminLTE-3.0.4\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\AdminLTE-3.0.4\.github\ISSUE_TEMPLATE\bug-report-for-adminlte-v2-4-x.md" />
     <None Include="wwwroot\AdminLTE-3.0.4\.github\ISSUE_TEMPLATE\bug-report-for-adminlte-v3-x.md" />
     <None Include="wwwroot\AdminLTE-3.0.4\.github\ISSUE_TEMPLATE\feature-request-for-adminlte-v3-x.md" />
-    <None Include="wwwroot\AdminLTE-3.0.4\AdminLTE-3.0.4\.github\ISSUE_TEMPLATE\bug-report-for-adminlte-v2-4-x.md" />
-    <None Include="wwwroot\AdminLTE-3.0.4\AdminLTE-3.0.4\.github\ISSUE_TEMPLATE\bug-report-for-adminlte-v3-x.md" />
-    <None Include="wwwroot\AdminLTE-3.0.4\AdminLTE-3.0.4\.github\ISSUE_TEMPLATE\feature-request-for-adminlte-v3-x.md" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +28,10 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

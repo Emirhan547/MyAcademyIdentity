@@ -1,19 +1,19 @@
 ﻿@model List<Message>
 @{
-    ViewData["Title"] = "Gelen Kutusu";
+    ViewData["Title"] = "Taslaklar";
     Layout = "~/Views/MainLayout/Index.cshtml";
 }
 
 <div class="col-md-9">
-    <div class="card card-primary card-outline">
+    <div class="card card-warning card-outline">
         <div class="card-header">
-            <h3 class="card-title">📥 Gelen Kutusu</h3>
+            <h3 class="card-title"><i class="fas fa-pencil-alt mr-1"></i> Taslaklar</h3>
 
             <div class="card-tools">
                 <div class="input-group input-group-sm">
-                    <input type="text" class="form-control" placeholder="Mail Ara">
+                    <input type="text" class="form-control" placeholder="Taslak Ara">
                     <div class="input-group-append">
-                        <div class="btn btn-primary">
+                        <div class="btn btn-warning">
                             <i class="fas fa-search"></i>
                         </div>
                     </div>
@@ -23,6 +23,7 @@
 
         <div class="card-body p-0">
             <div class="mailbox-controls mb-2">
+                <!-- Check all button -->
                 <button type="button" class="btn btn-default btn-sm checkbox-toggle">
                     <i class="far fa-square"></i>
                 </button>
@@ -47,7 +48,6 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
-                            // Manuel kategori rengi
                             var badgeClass = item.Category switch
                             {
                                 "Önemli" => "badge-danger",
@@ -58,29 +58,20 @@
                                 _ => "badge-primary"
                             };
 
-                            <tr class="@(!item.IsRead ? "font-weight-bold" : "")">
+                            <tr>
                                 <td>
                                     <div class="icheck-primary">
                                         <input type="checkbox" id="check@(item.MessageId)" value="@item.MessageId" class="message-checkbox">
                                         <label for="check@(item.MessageId)"></label>
                                     </div>
                                 </td>
-                                <td class="mailbox-star">
-                                    <a href="#">
-                                        <i class="fas fa-star @(item.Category == "Önemli" ? "text-warning" : "text-muted")"></i>
-                                    </a>
-                                </td>
                                 <td class="mailbox-name">
-                                    <a href="/Message/MessageDetails/@item.MessageId">
-                                        <i class="fas fa-user-circle text-primary mr-1"></i>
-                                        @item.Sender.FirstName @item.Sender.LastName
-                                        @if (!item.IsRead)
-                                        {
-                                            <span class="badge badge-primary ml-1">Yeni</span>
-                                        }
+                                    <a href="/Message/EditDraft/@item.MessageId">
+                                        <i class="fas fa-user-circle text-muted mr-1"></i>
+                                        @item.Receiver?.Email
                                     </a>
                                 </td>
-                                <td class="mailbox-subject text-truncate" style="max-width:300px;">
+                                <td class="mailbox-subject text-truncate" style="max-width: 300px;">
                                     <b>@item.Subject</b> - @item.Body.Substring(0, Math.Min(item.Body.Length, 50))...
                                 </td>
                                 <td class="mailbox-attachment">
@@ -90,11 +81,14 @@
                                     }
                                 </td>
                                 <td class="mailbox-date">@item.SentDate.ToString("dd.MM.yyyy HH:mm")</td>
-                                <td>
+                                <td class="text-right">
+                                    <a href="/Message/EditDraft/@item.MessageId" class="btn btn-sm btn-outline-primary">
+                                        <i class="fas fa-edit"></i> Düzenle
+                                    </a>
                                     <form asp-action="DeleteMessage" method="post" class="d-inline">
                                         <input type="hidden" name="id" value="@item.MessageId" />
-                                        <button type="submit" class="btn btn-sm btn-outline-danger" title="Sil">
-                                            <i class="fas fa-trash"></i>
+                                        <button type="submit" class="btn btn-sm btn-outline-danger">
+                                            <i class="fas fa-trash"></i> Sil
                                         </button>
                                     </form>
                                 </td>
@@ -107,6 +101,7 @@
 
         <div class="card-footer p-0">
             <div class="mailbox-controls">
+                <!-- Footer kontrolleri aynen korunuyor -->
                 <button type="button" class="btn btn-default btn-sm checkbox-toggle">
                     <i class="far fa-square"></i>
                 </button>
