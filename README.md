@@ -55,7 +55,8 @@ Modern ve kullanıcı dostu bir e-posta yönetim sistemi. ASP.NET Core 9 MVC, En
 
 <img width="1910" height="857" alt="Ekran görüntüsü 2025-09-21 031127" src="https://github.com/user-attachments/assets/a0b9e043-a710-4d03-8f27-e248624bc5c8" />
 
-<img width="1903" height="852" alt="Ekran görüntüsü 2025-09-21 031158" src="https://github.com/user-attachments/assets/c38ba56b-e8a6-4221-a3fe-f9b44f494e16" />
+<img width="1914" height="858" alt="Ekran görüntüsü 2025-09-21 031919" src="https://github.com/user-attachments/assets/0c6ad592-1358-460d-a223-39bbfbadb28f" />
+
 
 <img width="1902" height="793" alt="Ekran görüntüsü 2025-09-21 031218" src="https://github.com/user-attachments/assets/9f68ddfd-d835-4901-aff1-9b406aa77382" />
 
